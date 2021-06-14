@@ -7,11 +7,12 @@ const animeMapper = require("../mapper/AnimeMapper");
 /* GET anime information by ID */
 router.get('/:id', function(req, res, next) {
     mapper = new animeMapper;
-    console.log(mapper.x);
+    
   axios.get("https://api.jikan.moe/v3/anime/" + req.params.id)
     .then( function(response){
-        let string = "oli"
-        res.send(string);
+        mapper = new animeMapper;
+        anime = mapper.json_to_anime(response.data);
+        res.send(anime);
         }
     )
     .catch(function (response) {
@@ -22,7 +23,8 @@ router.get('/:id', function(req, res, next) {
     )
 });
 
-router.get('/search/', function(req, res, next) {
+router.get('', function(req, res, next) {
+
     axios.get("https://api.jikan.moe/v3/search/anime?q=" + req.query.title)
       .then( function(response){
           res.send(response.data);
@@ -35,5 +37,6 @@ router.get('/search/', function(req, res, next) {
           }
       )
 });
+
 
 module.exports = router;
