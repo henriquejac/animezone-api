@@ -1,11 +1,10 @@
 module.exports = class Anime{
 
-    constructor(mal_id, title, synopsis, episodes, status, rating, img_url){
+    constructor(mal_id, title, synopsis, episodes, rating, img_url){
         this.id = mal_id;
         this.title = title;
         this.synopsis = synopsis;
         this.episodes = episodes;
-        this.status = status;
         this.rating = rating;
         this.image = img_url;
     }
@@ -50,12 +49,5 @@ module.exports = class Anime{
     }
     set image(img_url){
         this._image = img_url;
-    }
-    
-    get status(){
-        return this._status;
-    }
-    set status(stats){
-        this._status = stats;
     }
 }

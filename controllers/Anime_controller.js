@@ -3,7 +3,7 @@ const AnimeMapper = require("../mapper/AnimeMapper");
 const Anime_request = require("../client/Anime_request");
 let anime_request = new Anime_request;
 let mapper = new AnimeMapper;
-let anime;
+
 
 module.exports = class AnimeController{    
 

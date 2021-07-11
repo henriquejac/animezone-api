@@ -2,31 +2,23 @@ var express = require('express');
 var router = express.Router();
 const axios = require('axios');
 const { response } = require('express');
-const AnimeController = require("../controllers/Anime_controller");
+const Anime_Controller = require("../controllers/Anime_controller");
+const Anime_Search_Controller = require("../controllers/Anime_search_controller");
 
-let animeController = new AnimeController;
+let animeController = new Anime_Controller;
+let animeSearchControler = new Anime_Search_Controller;
 
 /* GET anime information by ID */
 router.get('/:id', async function(req, res, next) {
 
     let anime = await animeController.apiRequest(req.params.id);
-    console.log(anime);
     res.send(anime);
 });
 
 router.get('', async function(req, res, next) {
 
-    axios.get("https://api.jikan.moe/v3/search/anime?q=" + req.query.title)
-      .then( function(response){
-          res.send(response.data);
-          }
-      )
-      .catch(function (response) {
-          console.log("Algo deu errado!!");
-          console.log(response);
-          res.send(response);
-          }
-      )
+    let AnimeList = await animeSearchControler.apiSearch(req.query.title);
+    res.send(AnimeList);
 });
 
 
